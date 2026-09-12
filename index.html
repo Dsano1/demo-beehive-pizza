@@ -93,7 +93,7 @@
   .form h3{font-size:19px;margin-bottom:6px}
   .form p{font-size:13.5px;color:var(--ink-soft);margin-bottom:18px}
   label{display:block;font-size:13.5px;font-weight:600;margin:14px 0 6px}
-  input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;font-size:15px;font-family:'Inter',sans-serif;background:#fffdf9}
+  input,select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:9px;font-size:16px;font-family:'Inter',sans-serif;background:#fffdf9}
   input:focus,select:focus{outline:2px solid var(--lime);border-color:var(--lime)}
   .form .btn{margin-top:20px;width:100%;text-align:center;border:0;cursor:pointer;font-family:'Sora'}
   footer{background:var(--char);color:rgba(255,255,255,.7);padding:36px 0;font-size:13.5px}
@@ -101,13 +101,27 @@
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   @media (prefers-reduced-motion: reduce){.hero-bg img{animation:none}}
   @media (max-width:860px){
-    nav ul{display:none}
-    .menu-btn{display:block}
+    nav{position:relative}
+    nav ul{display:none;position:absolute;top:100%;left:-24px;right:-24px;background:rgba(22,15,12,.97);flex-direction:column;gap:0;padding:4px 24px 14px;border-bottom:1px solid rgba(255,255,255,.08)}
+    nav ul.open{display:flex}
+    nav ul li{padding:13px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:15px}
+    nav ul li:last-child{border-bottom:0}
+    .menu-btn{display:block;min-width:44px;min-height:44px;font-size:22px}
+    .header-cta{display:none}
     .hero{min-height:0}
-    .hero .wrap{padding:110px 24px 70px}
-    .review-card{position:static;margin-top:34px;max-width:100%}
+    .hero .wrap{padding:88px 22px 44px}
+    .hero h1{font-size:30px}
+    .hero p{font-size:16px;margin-bottom:22px}
+    .hero-ctas{flex-direction:column;align-items:stretch;gap:10px}
+    .hero-ctas .btn{width:100%;text-align:center;padding:14px 22px}
+    .review-card{position:static;margin:26px auto 0;max-width:360px;padding:16px 18px}
+    .review-card p{font-size:13.5px}
+    .trustbar .wrap{gap:8px;padding:12px 22px;font-size:12.5px}
+    .menu-list li{flex-direction:column;gap:2px;padding:11px 0}
+    .info-list li{flex-direction:column;gap:1px}
     .split,.visit-grid{grid-template-columns:1fr}
-    .split .photo{height:300px}
+    .split .photo{height:260px}
+    section{padding:56px 0}
   }
 </style>
 </head>
@@ -122,8 +136,8 @@
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#visit">Visit</a></li>
       </ul>
-      <button class="menu-btn" aria-label="Open menu" onclick="document.querySelector('nav ul').style.display='block'">&#9776;</button>
-      <a class="btn btn-lime" href="#visit">Order Carryout</a>
+      <button class="menu-btn" aria-label="Open menu" onclick="var u=this.closest('nav').querySelector('ul');u.classList.toggle('open');this.setAttribute('aria-expanded',u.classList.contains('open'))">&#9776;</button>
+      <a class="btn btn-lime header-cta" href="#visit">Order Carryout</a>
     </nav>
   </div>
 </header>
@@ -260,5 +274,5 @@
     <span><a href="#visit">Hours &amp; Location</a> &middot; <a href="#menu">Menu</a> &middot; <a href="tel:+18015550198">Call Us</a></span>
   </div>
 </footer>
-</body>
+<script>document.querySelectorAll('nav ul a').forEach(a=>a.addEventListener('click',()=>document.querySelector('nav ul').classList.remove('open')))</script></body>
 </html>
